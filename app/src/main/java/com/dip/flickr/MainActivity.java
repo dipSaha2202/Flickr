@@ -2,29 +2,43 @@ package com.dip.flickr;
 
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements CreateUrlAndGetJsonData.DataListener {
+public class MainActivity extends AppCompatActivity implements
+                                        CreateUrlAndGetJsonData.DataListener,
+                                        RecycleViewItemClickListener.OnRecycleViewItemClickListener{
+
     private static final String TAG = "Result";
     public static final String URL =
             "https://api.flickr.com/services/feeds/photos_public.gne?tags=android&tagmodeany&format=json&nojsoncallback=1";
+    private RecycleViewAdapter recycleViewAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        RecyclerView recyclerView = findViewById(R.id.recycle_content);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerView.addOnItemTouchListener(new RecycleViewItemClickListener(
+                MainActivity.this, recyclerView, this));
+
+        recycleViewAdapter = new RecycleViewAdapter(this, new ArrayList<Photo>());
+        recyclerView.setAdapter(recycleViewAdapter);
 
         //DownloadSourceCode code = new DownloadSourceCode();
         //code.execute(URL);
@@ -77,9 +91,20 @@ public class MainActivity extends AppCompatActivity implements CreateUrlAndGetJs
     @Override
     public void dataProcessingListener(List<Photo> data, DownloadStatus status) {
         if (status == DownloadStatus.COMPLETED){
-            Log.d(TAG, "onDownloadComplete: completed : code - " + data);
+            recycleViewAdapter.loadNewData(data);
+           // recycleViewAdapter.notifyDataSetChanged();
         } else {
             Log.d(TAG, "onDownloadComplete: current status : " + status);
         }
+    }
+
+    @Override
+    public void onRecycleItemClick(View view, int position) {
+
+    }
+
+    @Override
+    public void onRecycleItemLongClick(View view, int position) {
+
     }
 }
