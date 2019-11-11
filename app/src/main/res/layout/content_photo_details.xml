@@ -30,14 +30,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:gravity="center"
                     android:padding="2dp"
                     android:text="TextView"
-                    android:textSize="30sp" />
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <ImageView
                     android:id="@+id/imgPhoto_photoDetails"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="300dp"
                     android:layout_margin="8dp"
                     android:scaleType="fitCenter"
                     app:srcCompat="@drawable/place_holder" />
@@ -47,18 +49,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:gravity="center"
                     android:padding="2dp"
                     android:text="TextView"
-                    android:textSize="30sp" />
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtTags_photoDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
+                    android:gravity="center"
                     android:padding="2dp"
                     android:text="TextView"
-                    android:textSize="30sp" />
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </ScrollView>

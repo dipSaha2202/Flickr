@@ -14,8 +14,13 @@
         <activity
             android:name=".PhotoDetailsActivity"
             android:label="@string/title_activity_photo_details"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
+            >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.dip.flickr.MainActivity" />
         </activity>
         <activity
             android:name=".SearchActivity"
@@ -27,9 +32,11 @@
                 android:value="com.dip.flickr.MainActivity" />
         </activity>
         <activity
+
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
