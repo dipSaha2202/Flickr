@@ -21,17 +21,26 @@ class RecycleViewItemClickListener extends RecyclerView.SimpleOnItemTouchListene
     private final OnRecycleViewItemClickListener itemClickListener;
     private final GestureDetectorCompat gestureDetector;
 
-    public RecycleViewItemClickListener(Context context, final RecyclerView view, OnRecycleViewItemClickListener itemClickListener) {
+    public RecycleViewItemClickListener(Context context, final RecyclerView view, final OnRecycleViewItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
         gestureDetector = new GestureDetectorCompat(context, new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
-                return super.onSingleTapUp(e);
+                Log.d(TAG, "onSingleTapUp: : called");
+                View childView = view.findChildViewUnder(e.getX(), e.getY());
+                if (childView != null && itemClickListener != null){
+                    itemClickListener.onRecycleItemClick(childView, view.getChildAdapterPosition(childView));
+                }
+                return true;
             }
 
             @Override
             public void onLongPress(MotionEvent e) {
-                super.onLongPress(e);
+                View childView = view.findChildViewUnder(e.getX(), e.getY());
+                if (childView != null && itemClickListener != null){
+                    itemClickListener.onRecycleItemLongClick(childView, view.getChildAdapterPosition(childView));
+                }
+               // super.onLongPress(e);
             }
         });
 
@@ -41,6 +50,7 @@ class RecycleViewItemClickListener extends RecyclerView.SimpleOnItemTouchListene
     public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
 
         if (gestureDetector != null){
+            Log.d(TAG, "onInterceptTouchEvent: return : " + gestureDetector.onTouchEvent(e));
             return gestureDetector.onTouchEvent(e);
 
         } else {

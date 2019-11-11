@@ -1,5 +1,6 @@
 package com.dip.flickr;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +16,7 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements
+public class MainActivity extends BaseActivity implements
                                         CreateUrlAndGetJsonData.DataListener,
                                         RecycleViewItemClickListener.OnRecycleViewItemClickListener{
 
@@ -28,8 +29,8 @@ public class MainActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        activateToolbar(false);
 
         RecyclerView recyclerView = findViewById(R.id.recycle_content);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -105,6 +106,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onRecycleItemLongClick(View view, int position) {
-
+        Intent intent = new Intent(MainActivity.this, PhotoDetailsActivity.class);
+        intent.putExtra(PHOTO_TRANSFER, recycleViewAdapter.getPhotoOnTap(position));
+        startActivity(intent);
     }
 }

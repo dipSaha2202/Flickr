@@ -2,8 +2,12 @@ package com.dip.flickr;
 
 import androidx.annotation.NonNull;
 
-class Photo {
+import java.io.Serializable;
+
+class Photo implements Serializable {
     private String title, author, authorId, link, tags, image;
+    public static final long serialVersionUID = 1L;
+
 
     public Photo(String title, String author, String authorId, String link, String tags, String image) {
         this.title = title;
@@ -50,4 +54,6 @@ class Photo {
                 ", image='" + image + '\'' +
                 '}';
     }
+
+
 }
