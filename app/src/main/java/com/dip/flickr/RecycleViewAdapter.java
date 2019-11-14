@@ -15,8 +15,6 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ImageViewHolder> {
-    private static final String TAG = "Result";
-
     private Context context;
     private List<Photo> photos;
 
@@ -63,13 +61,11 @@ class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ImageVi
     }
 
     static class ImageViewHolder extends RecyclerView.ViewHolder{
-        private static final String TAG = "Result";
-        ImageView thumbnail = null;
-        TextView txtTitle = null;
+        ImageView thumbnail;
+        TextView txtTitle;
 
         public ImageViewHolder(@NonNull View itemView) {
             super(itemView);
-
             this.thumbnail = itemView.findViewById(R.id.imgThumbnail);
             this.txtTitle = itemView.findViewById(R.id.txtTitle);
         }

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 public class BaseActivity extends AppCompatActivity {
-    private static final String TAG = "Result";
     static final String FLICKR_QUERY = "FLICKR_QUERY";
     static final String PHOTO_TRANSFER = "PHOTO_TRANSFER";
 
@@ -23,5 +22,4 @@ public class BaseActivity extends AppCompatActivity {
                 actionBar.setDisplayHomeAsUpEnabled(enableHome);
             }
     }
-
 }

@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,15 +21,12 @@ public class MainActivity extends BaseActivity implements
                                         RecycleViewItemClickListener.OnRecycleViewItemClickListener{
 
     private static final String TAG = "Result";
-    public static final String URL =
-            "https://api.flickr.com/services/feeds/photos_public.gne?tags=android&tagmodeany&format=json&nojsoncallback=1";
     private RecycleViewAdapter recycleViewAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         activateToolbar(false);
 
         RecyclerView recyclerView = findViewById(R.id.recycle_content);
@@ -42,10 +37,6 @@ public class MainActivity extends BaseActivity implements
 
         recycleViewAdapter = new RecycleViewAdapter(this, new ArrayList<Photo>());
         recyclerView.setAdapter(recycleViewAdapter);
-
-        //DownloadSourceCode code = new DownloadSourceCode();
-        //code.execute(URL);
-
     }
 
     @Override
@@ -63,7 +54,6 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
@@ -84,17 +74,6 @@ public class MainActivity extends BaseActivity implements
 
         return super.onOptionsItemSelected(item);
     }
-
-
-
-    /*@Override
-    public void downloadListener(String data, DownloadStatus status) {
-            if (status == DownloadStatus.COMPLETED){
-                Log.d(TAG, "onDownloadComplete: completed : code - " + data);
-            } else {
-                Log.d(TAG, "onDownloadComplete: current status : " + status);
-            }
-    }*/
 
     @Override
     public void dataProcessingListener(List<Photo> data, DownloadStatus status) {

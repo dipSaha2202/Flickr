@@ -45,12 +45,12 @@ class CreateUrlAndGetJsonData extends AsyncTask<String, Void, List<Photo>> imple
         void dataProcessingListener(List<Photo> data, DownloadStatus status);
     }
 
-    void executeOnSameThread(String searchCriteria){
+  /*  void executeOnSameThread(String searchCriteria){
         runningOnSameThread = true;
         String destinationURI = createURI(searchCriteria, language, matchAll);
         DownloadSourceCode code = new DownloadSourceCode(this);
         code.execute(destinationURI);
-    }
+    }*/
 
     private String createURI(String searchCriteria, String language, boolean matchAll) {
         return Uri.parse(baseURL).buildUpon()
