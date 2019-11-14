@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 class RecycleViewItemClickListener extends RecyclerView.SimpleOnItemTouchListener {
     private static final String TAG = "Result";
+    boolean tap = false;
 
     interface OnRecycleViewItemClickListener{
         void onRecycleItemClick(View view, int position);
@@ -26,10 +27,12 @@ class RecycleViewItemClickListener extends RecyclerView.SimpleOnItemTouchListene
         gestureDetector = new GestureDetectorCompat(context, new GestureDetector.SimpleOnGestureListener(){
             @Override
             public boolean onSingleTapUp(MotionEvent e) {
+                if (tap){
                 Log.d(TAG, "onSingleTapUp: : called");
                 View childView = view.findChildViewUnder(e.getX(), e.getY());
                 if (childView != null && itemClickListener != null){
                     itemClickListener.onRecycleItemClick(childView, view.getChildAdapterPosition(childView));
+                }
                 }
                 return true;
             }
@@ -48,9 +51,9 @@ class RecycleViewItemClickListener extends RecyclerView.SimpleOnItemTouchListene
 
     @Override
     public boolean onInterceptTouchEvent(@NonNull RecyclerView rv, @NonNull MotionEvent e) {
-
         if (gestureDetector != null){
-            Log.d(TAG, "onInterceptTouchEvent: return : " + gestureDetector.onTouchEvent(e));
+            tap = gestureDetector.onTouchEvent(e);
+            Log.d(TAG, "onInterceptTouchEvent: return : " + tap);
             return gestureDetector.onTouchEvent(e);
 
         } else {

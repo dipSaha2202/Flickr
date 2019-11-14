@@ -87,7 +87,10 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onRecycleItemClick(View view, int position) {
-
+        Log.d(TAG, "onRecycleItemClick: called");
+        Intent intent = new Intent(MainActivity.this, PhotoDetailsActivity.class);
+        intent.putExtra(PHOTO_TRANSFER, recycleViewAdapter.getPhotoOnTap(position));
+        startActivity(intent);
     }
 
     @Override
