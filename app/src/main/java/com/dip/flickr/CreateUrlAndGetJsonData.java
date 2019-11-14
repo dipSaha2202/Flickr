@@ -82,7 +82,7 @@ class CreateUrlAndGetJsonData extends AsyncTask<String, Void, List<Photo>> imple
                     String link = photoUrl.replaceFirst("_m.", "_b.");
 
                     photoList.add(new Photo(title, author, authorId, link, tags, photoUrl));
-                    Log.d(TAG, "downloadListener: data : " + photoList.get(i).toString());
+                   // Log.d(TAG, "downloadListener: data : " + photoList.get(i).toString());
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

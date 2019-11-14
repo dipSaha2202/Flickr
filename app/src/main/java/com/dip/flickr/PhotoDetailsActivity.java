@@ -2,15 +2,7 @@ package com.dip.flickr;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -35,9 +27,9 @@ public class PhotoDetailsActivity extends BaseActivity {
         Photo photo = (Photo) intentFromTap.getSerializableExtra(PHOTO_TRANSFER);
 
         if (photo != null){
-            txtPhotoTitle.setText(photo.getTitle());
-            txtTags.setText(photo.getTags());
-            txtAuthor.setText(photo.getAuthor());
+            txtPhotoTitle.setText(getResources().getString(R.string.photo_title, photo.getTitle()));
+            txtTags.setText(getString(R.string.photo_tags, photo.getTags()));
+            txtAuthor.setText(getString(R.string.photo_author, photo.getAuthor()));
 
             Picasso.with(this).load(photo.getLink())
                     .error(R.drawable.place_holder)

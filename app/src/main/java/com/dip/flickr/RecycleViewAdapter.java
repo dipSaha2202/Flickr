@@ -34,18 +34,23 @@ class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.ImageVi
 
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-    Photo photoItem = photos.get(position);
-        Picasso.with(context).load(photoItem.getImage())
-                .error(R.drawable.place_holder)
-                .placeholder(R.drawable.place_holder)
-                .into(holder.thumbnail);
+        if (photos == null || photos.size() ==0){
+            holder.thumbnail.setImageResource(R.drawable.place_holder);
+            holder.txtTitle.setText(context.getString(R.string.no_result));
+        } else {
+            Photo photoItem = photos.get(position);
+            Picasso.with(context).load(photoItem.getImage())
+                    .error(R.drawable.place_holder)
+                    .placeholder(R.drawable.place_holder)
+                    .into(holder.thumbnail);
 
-        holder.txtTitle.setText(photoItem.getTitle());
+            holder.txtTitle.setText(photoItem.getTitle());
+        }
     }
 
     @Override
     public int getItemCount() {
-        return ((photos != null && photos.size() > 0 ? photos.size() : 0));
+        return ((photos != null && photos.size() > 0 ? photos.size() : 1));
     }
 
     void loadNewData(List<Photo> photoList){
